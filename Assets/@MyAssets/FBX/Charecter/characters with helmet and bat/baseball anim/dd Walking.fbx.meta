@@ -1,0 +1,263 @@
+fileFormatVersion: 2
+guid: 0e65b00409e10714591a634f6f628244
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: mixamo.com
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: dd Walking(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint1
+      parentName: dd Walking(Clone)
+      position: {x: -0.0039042928, y: 0.7335266, z: -0.007428696}
+      rotation: {x: 0.022613235, y: -0.010359879, z: -0.7003969, w: 0.7133201}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint2
+      parentName: rounded_stickman_joint1
+      position: {x: -0.208301, y: 0, z: 0}
+      rotation: {x: 0.01097238, y: 0.03770099, z: -0.028150449, w: 0.9988322}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint3
+      parentName: rounded_stickman_joint2
+      position: {x: -0.23563498, y: 0, z: 0}
+      rotation: {x: 0.00009547935, y: -0.028948525, z: 0.032100815, w: 0.99906534}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint4
+      parentName: rounded_stickman_joint3
+      position: {x: -1.0916649, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint5
+      parentName: rounded_stickman_joint2
+      position: {x: -0.24550898, y: -0.133963, z: -0.065648}
+      rotation: {x: -0.09843014, y: 0.080470145, z: 0.78618896, w: 0.6047669}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint6
+      parentName: rounded_stickman_joint5
+      position: {x: -0.17161699, y: 0, z: 0}
+      rotation: {x: -0.026791938, y: -0.106739335, z: -0.097638, w: 0.9891187}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint7
+      parentName: rounded_stickman_joint6
+      position: {x: -0.290828, y: 0, z: 0}
+      rotation: {x: 0.1378665, y: 0.022569751, z: -0.0069415756, w: 0.9901694}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint8
+      parentName: rounded_stickman_joint7
+      position: {x: -0.220616, y: 0, z: 0}
+      rotation: {x: 0.15074691, y: 0.10681129, z: -0.08685348, w: 0.97893983}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint9
+      parentName: rounded_stickman_joint8
+      position: {x: -0.26314598, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0.19294158, w: 0.9812103}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint10
+      parentName: rounded_stickman_joint2
+      position: {x: -0.24551, y: 0.133963, z: -0.065648}
+      rotation: {x: 0.7705556, y: 0.6334746, z: 0.054259785, w: -0.044833213}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint11
+      parentName: rounded_stickman_joint10
+      position: {x: 0.17161699, y: 0.000002, z: 0}
+      rotation: {x: -0.008420757, y: -0.0848043, z: -0.1019453, w: 0.991133}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint12
+      parentName: rounded_stickman_joint11
+      position: {x: 0.290827, y: -0.000002, z: 0}
+      rotation: {x: 0.09895575, y: 0.027569732, z: 0.00077704387, w: 0.9947095}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint13
+      parentName: rounded_stickman_joint12
+      position: {x: 0.220617, y: 0.000003, z: 0}
+      rotation: {x: 0.1905746, y: 0.05508618, z: -0.036266647, w: 0.97945476}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint14
+      parentName: rounded_stickman_joint13
+      position: {x: 0.263143, y: -0.0000050000003, z: 0}
+      rotation: {x: 0, y: -0, z: -0.19294158, w: 0.9812103}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint15
+      parentName: rounded_stickman_joint1
+      position: {x: 0.115487, y: 0.190986, z: 0}
+      rotation: {x: -0.08071072, y: 0.073190056, z: 0.9934431, w: 0.03464003}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint16
+      parentName: rounded_stickman_joint15
+      position: {x: -0.25769198, y: 0, z: 0}
+      rotation: {x: -0.06816077, y: -0.14583254, z: -0.009943221, w: 0.9869084}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint17
+      parentName: rounded_stickman_joint16
+      position: {x: -0.25769198, y: 0, z: 0}
+      rotation: {x: 0.616971, y: 0.34737363, z: -0.28927347, w: 0.6442043}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint18
+      parentName: rounded_stickman_joint17
+      position: {x: -0.12364999, y: 0, z: 0}
+      rotation: {x: 0.0074191345, y: 0.0021992463, z: -0.29492587, w: 0.9554888}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint19
+      parentName: rounded_stickman_joint18
+      position: {x: -0.197283, y: 0, z: 0}
+      rotation: {x: -0.009425421, y: -0.707044, z: -0.009425421, w: 0.707044}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint20
+      parentName: rounded_stickman_joint1
+      position: {x: 0.115485996, y: -0.190986, z: 0}
+      rotation: {x: 0.9886055, y: -0.039423667, z: 0.12848434, w: -0.06779972}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint21
+      parentName: rounded_stickman_joint20
+      position: {x: 0.25769198, y: 0, z: 0}
+      rotation: {x: -0.017840557, y: -0.33726442, z: 0.0062625296, w: 0.94122016}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint22
+      parentName: rounded_stickman_joint21
+      position: {x: 0.25769198, y: 0, z: 0}
+      rotation: {x: 0.6880457, y: 0.18779145, z: -0.21322949, w: 0.6677281}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint23
+      parentName: rounded_stickman_joint22
+      position: {x: 0.12364999, y: 0, z: 0}
+      rotation: {x: -0.004687209, y: -0.015279195, z: -0.4060912, w: 0.91369283}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rounded_stickman_joint24
+      parentName: rounded_stickman_joint23
+      position: {x: 0.19728398, y: 0, z: 0}
+      rotation: {x: -0.009425421, y: -0.707044, z: -0.009425421, w: 0.707044}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

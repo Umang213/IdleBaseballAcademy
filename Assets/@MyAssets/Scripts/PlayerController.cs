@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
         {
             instance = this;
         }
-
         //_anim = GetComponentInChildren<Animator>();
         //_rb = GetComponent<Rigidbody>();
         enabled = false;
