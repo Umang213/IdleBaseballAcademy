@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         {
             instance = this;
         }
+        //morning join meeting with aseem for golf project , set waiting animation , fill helmet and baseball
         //_anim = GetComponentInChildren<Animator>();
         //_rb = GetComponent<Rigidbody>();
         enabled = false;

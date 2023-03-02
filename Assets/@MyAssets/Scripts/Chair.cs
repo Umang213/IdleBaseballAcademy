@@ -16,5 +16,6 @@ public class Chair : MonoBehaviour
         transform1.position = sitingPoint.position;
         transform1.rotation = sitingPoint.rotation;
         storedCustomer.SetAnimation("Sit", true);
+        storedCustomer.isSiting = true;
     }
 }

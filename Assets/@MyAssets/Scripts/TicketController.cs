@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,18 +9,20 @@ public class TicketController : MonoBehaviour
     public Image fillImage;
     public Collider playerCollider;
 
-    //public MoneyStacker moneyStacker;
+    public MoneyStacker moneyStacker;
     public Transform stadingPoint;
     public List<Chair> chairs;
 
     bool _verify;
     bool _isCustomer;
-
     bool _isPlayer;
+
+    BaseBallController _baseballController;
     //public bool _isWorker;
 
     private void Start()
     {
+        _baseballController = BaseBallController.instance;
         CodeMonkey.Utils.FunctionTimer.Create(() => { CustomerManager.instance.instanceSpawing(); }, 1);
     }
 
@@ -80,22 +83,40 @@ public class TicketController : MonoBehaviour
         if ((_isCustomer && _isPlayer && _verify))
         {
             var customer = CustomerManager.instance.allWaitingCustomers[0];
-            var temp = chairs.Find(x => x.storedCustomer == null);
-            if (temp != null)
+            var task = _baseballController.allTaskControllers.Find(x => x.storedCustomer == null);
+            if (task != null && _baseballController.helmetShop.allWaitingCustomer.Count < 3)
             {
-                temp.storedCustomer = customer;
-                customer.SetTarget(temp.standingPoint.position, (() => { temp.SittingCustomer(); }));
-                customer.isCustomerReady = true;
-                //CodeMonkey.Utils.FunctionTimer.Create(() => moneyStacker.GiveMoney(customer.transform, 5), 0.5f);
-                CustomerManager.instance.allWaitingCustomers.Remove(customer);
-                _isCustomer = false;
-                _verify = false;
-                CodeMonkey.Utils.FunctionTimer.Create(() =>
+                task.storedCustomer = customer;
+                task.storedCustomer.taskController = task;
+
+                _baseballController.helmetShop.allWaitingCustomer.Add(customer);
+                _baseballController.helmetShop.ArrangePosition();
+                //_ballController.CollectHelmet(task.storedCustomer);
+                NextCustomer(customer);
+            }
+            else
+            {
+                var temp = chairs.Find(x => x.storedCustomer == null);
+                if (temp != null)
                 {
-                    CustomerManager.instance.instanceSpawing();
-                    CustomerManager.instance.ArrangePosition();
-                }, 2);
+                    temp.storedCustomer = customer;
+                    customer.SetTarget(temp.standingPoint.position, (() => { temp.SittingCustomer(); }));
+                    NextCustomer(customer);
+                }
             }
         }
+    }
+
+    private void NextCustomer(Customer customer)
+    {
+        moneyStacker.GiveMoney(customer.transform, 5);
+        CustomerManager.instance.allWaitingCustomers.Remove(customer);
+        _isCustomer = false;
+        _verify = false;
+        CodeMonkey.Utils.FunctionTimer.Create(() =>
+        {
+            CustomerManager.instance.instanceSpawing();
+            CustomerManager.instance.ArrangePosition();
+        }, 2);
     }
 }

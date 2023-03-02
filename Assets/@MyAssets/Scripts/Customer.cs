@@ -1,17 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
-    public Transform donutPoint;
-    public Transform lHandPoint;
-
-    public Transform rHandPoint;
-    //public BowlingBallTask bowlingBallTask;
-
-    public bool isCustomerReady;
+    public GameObject helmet, baseball;
+    public bool isSiting;
     NavMeshAgent _navMeshAgent;
     Animator _anim;
     CustomerManager _customerManager;
@@ -19,6 +15,7 @@ public class Customer : MonoBehaviour
     Vector3 _target;
     bool _isStop;
 
+    public TaskController taskController;
     public bool _isExit;
 
     private void Awake()
@@ -31,6 +28,7 @@ public class Customer : MonoBehaviour
     private void Start()
     {
         StartCoroutine(EditUpdate());
+        StartCoroutine(PlaySitingAnimation());
     }
 
     IEnumerator EditUpdate()
@@ -129,5 +127,18 @@ public class Customer : MonoBehaviour
         pos.y += 3;
         var temp = Instantiate(par.gameObject, pos, Quaternion.identity, transform);
         temp.GetComponent<ParticleSystem>().Play();
+    }
+
+    private List<string> aniprm = new List<string> { "Task_1", "Task_2", "Task_3", "Task_4", "Task_5" };
+
+    IEnumerator PlaySitingAnimation()
+    {
+        if (isSiting)
+        {
+            SetAnimation(aniprm[Helper.RandomInt(0, aniprm.Count)]);
+        }
+
+        yield return new WaitForSeconds(Helper.RandomInt(10, 25));
+        StartCoroutine(PlaySitingAnimation());
     }
 }

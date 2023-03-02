@@ -21,7 +21,7 @@ public static class PlayerPrefsKey
     public const string Coins = "Coins";
     public const string Attempts = "Attempts";
     public const string Money = "Money";
-    public const string UnlockCount = "UnlockCount";
+    public const string TutorialCount = "TutorialCount";
 }
 
 public static class InputManager

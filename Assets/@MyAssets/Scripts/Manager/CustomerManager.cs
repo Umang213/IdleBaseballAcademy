@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CustomerManager : MonoBehaviour
 {
     public static CustomerManager instance;
     public Customer[] allCustomer;
     public Transform customerInstantiatePoint;
-    public ParticleSystem ConfettiBlast;
+     public ParticleSystem confettiBlast;
     public TicketController ticketController;
     public List<Customer> allWaitingCustomers;
 

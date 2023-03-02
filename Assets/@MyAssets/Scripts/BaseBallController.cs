@@ -1,17 +1,43 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseBallController : MonoBehaviour
 {
-    public Customer storedCustomer;
-    public Transform standingPoint;
+    public static BaseBallController instance;
+    public List<GameObject> allHelmet;
+    public List<GameObject> allBaseball;
+    public HelmetShop helmetShop;
+    public BaseballShop baseballShop;
+    public List<TaskController> allTaskControllers;
 
-    // Start is called before the first frame update
-    void Start()
+    protected void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    /*public void CollectHelmet(Customer customer)
     {
+        customer.SetTarget(helmetPoint.position, (() =>
+        {
+            customer.helmet.Show();
+            CollectBaseball(customer);
+        }));
     }
+
+    public void CollectBaseball(Customer customer)
+    {
+        customer.SetTarget(baseballPoint.position, () =>
+        {
+            customer.baseball.Show();
+            customer.SetTarget(customer.taskController.gamePlayPoint.position,
+                (() => customer.taskController.PlayTask()));
+        });
+    }*/
 }
