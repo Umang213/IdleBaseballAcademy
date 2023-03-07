@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     public GameObject helmet, baseball;
+    public GameObject hair;
+    public bool isGirl;
     public bool isSiting;
     NavMeshAgent _navMeshAgent;
     Animator _anim;
@@ -136,6 +138,10 @@ public class Customer : MonoBehaviour
         if (isSiting)
         {
             SetAnimation(aniprm[Helper.RandomInt(0, aniprm.Count)]);
+        }
+        else
+        {
+            yield break;
         }
 
         yield return new WaitForSeconds(Helper.RandomInt(10, 25));

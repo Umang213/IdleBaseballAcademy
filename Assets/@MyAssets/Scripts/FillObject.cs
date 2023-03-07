@@ -11,7 +11,8 @@ public class FillObject : MonoBehaviour
     public Image fillImage;
     public List<GameObject> allFillObject;
     public UnityEvent playerTriggerEnter;
-
+    public Vector3 position;
+    public bool isHelmetShop;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,11 +20,33 @@ public class FillObject : MonoBehaviour
         {
             if (_isPLayer) return;
             _isPLayer = true;
-            /*DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 0, 1.5f)
-                .OnComplete(() => StartCoroutine(StartFilling()))
-                .SetId(fillImage);*/
-            StartCoroutine(StartFilling());
-            playerTriggerEnter?.Invoke();
+            if (allFillObject.FindAll(x => x.activeSelf == false).Count > 0)
+            {
+                DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 0, 1f).From(1)
+                    .OnComplete(() =>
+                    {
+                        CameraFollow.instance.MoveTo(position, 0.5f);
+                        StartCoroutine(StartFilling());
+                        var tutorial = TutorialControler.Instance;
+                        if (isHelmetShop)
+                        {
+                            if (tutorial.helmetPoint != null)
+                            {
+                                tutorial.helmetPoint = null;
+                                tutorial.targetPoint = null;
+                            }
+                        }
+                        else
+                        {
+                            if (tutorial.baseballPoint != null)
+                            {
+                                tutorial.baseballPoint = null;
+                                tutorial.targetPoint = null;
+                            }
+                        }
+                    })
+                    .SetId(fillImage);
+            }
         }
     }
 
@@ -33,10 +56,31 @@ public class FillObject : MonoBehaviour
         _isPLayer = false;
         DOTween.Kill(fillImage);
         DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 1, 0.5f);
-        StopCoroutine(StartFilling());
+        //StopCoroutine(StartFilling());
     }
 
     IEnumerator StartFilling()
+    {
+        yield return new WaitForSeconds(1f);
+        var temp = allFillObject.FindAll(x => x.activeSelf == false);
+        for (byte i = 0; i < temp.Count; i++)
+        {
+            var i1 = i;
+
+            temp[i1].Show();
+            temp[i1].transform.DOScale(Vector3.one, 0.75f).SetEase(Ease.OutBack).From(Vector3.zero);
+            yield return new WaitForSeconds(0.1f);
+            if (i == temp.Count - 1)
+            {
+                CameraFollow.instance.ReturnToNormal();
+                DOTween.Kill(fillImage);
+                DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 1, 0.5f);
+                playerTriggerEnter?.Invoke();
+            }
+        }
+    }
+
+    /*IEnumerator StartFilling()
     {
         var temp = allFillObject.FindAll(x => x.activeSelf == false);
         for (byte i = 0; i < allFillObject.Count; i++)
@@ -65,5 +109,5 @@ public class FillObject : MonoBehaviour
                 DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 1, 0.5f);
             }
         }
-    }
+    }*/
 }

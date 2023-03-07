@@ -458,6 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   helmet: {fileID: 6896455373192266730}
   baseball: {fileID: 8593785156937262786}
+  hair: {fileID: 7282041228636233412}
+  isGirl: 1
   isSiting: 0
   taskController: {fileID: 0}
   _isExit: 0

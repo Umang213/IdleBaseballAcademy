@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
@@ -25,7 +27,6 @@ public class PlayerController : MonoBehaviour
         {
             instance = this;
         }
-        //morning join meeting with aseem for golf project , set waiting animation , fill helmet and baseball
         //_anim = GetComponentInChildren<Animator>();
         //_rb = GetComponent<Rigidbody>();
         enabled = false;
@@ -166,9 +167,10 @@ public class PlayerController : MonoBehaviour
 
     #region Stack
 
-    /*public int maxStackCount = 5;
+    public int maxStackCount = 9;
+
     public Transform stackPoint;
-    //public List<Collectables> allStackItems;
+    public List<Ball> allStackItems;
 
     public bool IsStackEmpty()
     {
@@ -180,7 +182,7 @@ public class PlayerController : MonoBehaviour
         return allStackItems.Count.Equals(maxStackCount);
     }
 
-    public void AddToStack(Collectables collectable)
+    public void AddToStack(Ball collectable)
     {
         collectable.transform.DOJump(stackPoint.position, 2, 1, 0.5f).OnComplete(() =>
         {
@@ -191,21 +193,29 @@ public class PlayerController : MonoBehaviour
         _anim.SetLayerWeight(1, 1);
     }
 
-    public Collectables RemoveFromLast(Collectables collectables, Transform stackTransform)
+    public Ball RemoveFromLast(Ball collectables, Transform stackTransform)
     {
-        var temp = allStackItems.Find(x => x.tag == collectables.tag);
-        temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
+        if (allStackItems.Count > 0)
         {
-            temp.transform.SetParent(stackTransform);
-            temp.transform.Rotate(Vector3.zero);
-        });
-        allStackItems.Remove(temp);
-        if (allStackItems.Count == 0)
-        {
-            _anim.SetLayerWeight(1, 0);
+            var temp = allStackItems.Find(x => x.tag == collectables.tag);
+            temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
+            {
+                temp.transform.SetParent(stackTransform);
+                temp.transform.Rotate(Vector3.zero);
+            });
+            allStackItems.Remove(temp);
+            if (allStackItems.Count == 0)
+            {
+                _anim.SetLayerWeight(1, 0);
+            }
+
+            return temp;
         }
-        return temp;
-    }*/
+        else
+        {
+            return null;
+        }
+    }
 
     #endregion
 }

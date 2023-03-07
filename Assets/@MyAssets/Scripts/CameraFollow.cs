@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 #endif
 using System;
+using DG.Tweening;
 #if UNITY_EDITOR
 using UnityEditor.Events;
 using UnityEditor;
@@ -24,8 +25,7 @@ public sealed class CameraFollow : MonoBehaviour
     [SerializeField] Vector3 _followOffset = Vector3.zero;
     [SerializeField] Vector3 _lookAtOffset = Vector3.zero;
 
-    [Header("Debug")]
-    [SerializeField] bool isDebug;
+    [Header("Debug")] [SerializeField] bool isDebug;
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
@@ -37,9 +37,8 @@ public sealed class CameraFollow : MonoBehaviour
     }
 #endif
 
-    protected void Awake()
+    private void Awake()
     {
-
         if (instance != null)
         {
             Destroy(gameObject);
@@ -48,6 +47,7 @@ public sealed class CameraFollow : MonoBehaviour
         {
             instance = this;
         }
+
         GameController.OnGameStart += CameraFollowOnGameStart;
         GameController.OnGameFinish += CameraFollowOnGameFinish;
         if (target == null) FindPlayer();
@@ -81,6 +81,7 @@ public sealed class CameraFollow : MonoBehaviour
             Debug.LogError("GameObject with Tag : <color=#00ff00>" + "Player" + "</color> Not Found");
             return;
         }
+
         enabled = false;
         this.target = localTarget.transform;
     }
@@ -118,21 +119,25 @@ public sealed class CameraFollow : MonoBehaviour
     internal void MoveTo(Vector3 position, float delay = 0, float duration = .5f, Action action = null)
     {
         enabled = false;
-        iTween.MoveTo(gameObject, iTween.Hash(
+        /*iTween.MoveTo(gameObject, iTween.Hash(
             IArg.POSITION, position,
             IArg.DELAY, delay,
             IArg.TIME, duration,
             IArg.ON_COMPLETE, action
-            ));
+        ));*/
+        transform.DOMove(position, duration).SetDelay(delay).OnComplete(() => action?.Invoke());
     }
 
-    internal void MoveTo(Vector3 position, Vector3 rotation, float delay = 0, float duration = .5f, Action action = null)
+    internal void MoveTo(Vector3 position, Vector3 rotation, float delay = 0, float duration = .5f,
+        Action action = null)
     {
-        MoveTo(position, delay, duration, action);
+        /*MoveTo(position, delay, duration, action);
         iTween.RotateTo(gameObject, iTween.Hash(
             IArg.ROTATION, rotation,
             IArg.TIME, duration
-            ));
+        ));*/
+        MoveTo(position, delay, duration, action);
+        transform.DORotate(rotation, duration);
     }
 
     internal void MoveTo(Transform target, float delay = 0, float duration = .5f, Action action = null)
@@ -142,6 +147,6 @@ public sealed class CameraFollow : MonoBehaviour
 
     internal void ReturnToNormal(float delay = 0f, float duration = .5f, Action action = null)
     {
-        MoveTo(GetDesiredPosition(), _lookAtOffset, delay, duration);
+        MoveTo(GetDesiredPosition(), _lookAtOffset, delay, duration, (() => enabled = true));
     }
 }

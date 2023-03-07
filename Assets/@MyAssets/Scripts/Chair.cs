@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Chair : MonoBehaviour
@@ -8,6 +5,11 @@ public class Chair : MonoBehaviour
     public Transform standingPoint;
     public Transform sitingPoint;
     public Customer storedCustomer;
+
+    private void Start()
+    {
+        CustomerManager.instance.ticketController.chairs.Add(this);
+    }
 
     public void SittingCustomer()
     {

@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager instance;
+    public Ball ballPrefab;
     public List<Money> allHideMoney;
     public List<GameObject> allHideMoneyImage;
+    public List<Ball> allHideBall;
     MoneyManager _moneyManager;
 
     protected void Awake()
@@ -27,8 +30,10 @@ public class PoolManager : MonoBehaviour
         {
             var m = Instantiate(_moneyManager.moneyPrefab, transform).GetComponent<Money>();
             var mi = Instantiate(_moneyManager.moneyImage, transform);
+            var ball = Instantiate(ballPrefab, transform);
             PoolMoney(m);
             PoolMoneyImage(mi);
+            PoolBall(ball);
         }
     }
 
@@ -64,6 +69,22 @@ public class PoolManager : MonoBehaviour
         }
     }
 
+    public Ball GetBall()
+    {
+        if (allHideBall.Count > 0)
+        {
+            var ball = allHideBall[0];
+            allHideBall.Remove(allHideBall[0]);
+            ball.Show();
+            return ball;
+        }
+        else
+        {
+            var ball = Instantiate(ballPrefab, transform);
+            return ball;
+        }
+    }
+
     public void PoolMoney(Money money)
     {
         if (allHideMoney.Count > 25)
@@ -89,6 +110,20 @@ public class PoolManager : MonoBehaviour
             moneyimage.Hide();
             moneyimage.transform.SetParent(transform);
             allHideMoneyImage.Add(moneyimage);
+        }
+    }
+
+    public void PoolBall(Ball ball)
+    {
+        if (allHideBall.Count > 25)
+        {
+            Destroy(ball.gameObject);
+        }
+        else
+        {
+            ball.Hide();
+            ball.transform.SetParent(transform);
+            allHideBall.Add(ball);
         }
     }
 }

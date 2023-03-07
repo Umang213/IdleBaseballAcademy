@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
         onLoad.RemoveNullEntry();
         onResult.RemoveNullEntry();
         onStart.RemoveNullEntry();
+        //9066660639
     }
 #endif
 

@@ -1,10 +1,13 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
-using System.Collections.Generic;
 
 public class TutorialControler : MonoBehaviour
 {
+    [SerializeField] private Transform counterPoint;
+    public Transform helmetPoint;
+    public Transform baseballPoint;
+
     public static TutorialControler Instance;
     public Transform targetPoint;
     public UnityEvent tutorialEvent = new UnityEvent();
@@ -30,6 +33,10 @@ public class TutorialControler : MonoBehaviour
     {
         _playerController = PlayerController.instance;
         lineRenderer.material.DOOffset(new Vector2(-1, 0), 1f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
+        if (PlayerPrefs.GetInt(PlayerPrefsKey.TutorialCount, 0).Equals(0))
+        {
+            targetPoint = counterPoint;
+        }
     }
 
     private void FixedUpdate()

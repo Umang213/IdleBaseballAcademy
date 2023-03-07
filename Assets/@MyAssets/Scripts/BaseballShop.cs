@@ -61,6 +61,14 @@ public class BaseballShop : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         var temp = fillObject.allFillObject.Find(x => x.activeSelf == true);
+        if (temp == null)
+        {
+            if (PlayerPrefs.GetInt(PlayerPrefsKey.TutorialCount, 0).Equals(0))
+            {
+                TutorialControler.Instance.targetPoint = TutorialControler.Instance.baseballPoint;
+            }
+        }
+
         if (temp != null && _storedCustomer != null)
         {
             temp.Hide();

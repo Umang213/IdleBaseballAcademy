@@ -63,13 +63,27 @@ public class HelmetShop : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         var temp = fillObject.allFillObject.Find(x => x.activeSelf == true);
+        if (temp == null)
+        {
+            if (PlayerPrefs.GetInt(PlayerPrefsKey.TutorialCount, 0).Equals(0))
+            {
+                TutorialControler.Instance.targetPoint = TutorialControler.Instance.helmetPoint;
+            }
+        }
+
         if (temp != null && _storedCustomer != null)
         {
             temp.SetActive(false);
             allWaitingCustomer.Remove(_storedCustomer);
+            if (_storedCustomer.isGirl)
+            {
+                _storedCustomer.hair.Hide();
+            }
+
             _storedCustomer.helmet.Show();
             _ballController.baseballShop.allWaitingCustomer.Add(_storedCustomer);
             _ballController.baseballShop.ArrangePosition();
+            _storedCustomer = null;
             ArrangePosition();
         }
     }

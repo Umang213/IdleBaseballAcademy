@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
 
 public class TicketController : MonoBehaviour
 {
-    public Image fillImage;
     public Collider playerCollider;
 
     public MoneyStacker moneyStacker;
@@ -18,7 +14,6 @@ public class TicketController : MonoBehaviour
     bool _isPlayer;
 
     BaseBallController _baseballController;
-    //public bool _isWorker;
 
     private void Start()
     {
@@ -34,11 +29,6 @@ public class TicketController : MonoBehaviour
             {
                 _isCustomer = true;
                 _verify = true;
-                /*if (_isWorker)
-                {
-                    //AggryPermission();
-                }
-                else */
                 if (_isPlayer)
                 {
                     AggryPermission();
@@ -84,6 +74,7 @@ public class TicketController : MonoBehaviour
         {
             var customer = CustomerManager.instance.allWaitingCustomers[0];
             var task = _baseballController.allTaskControllers.Find(x => x.storedCustomer == null);
+
             if (task != null && _baseballController.helmetShop.allWaitingCustomer.Count < 3)
             {
                 task.storedCustomer = customer;
@@ -118,5 +109,27 @@ public class TicketController : MonoBehaviour
             CustomerManager.instance.instanceSpawing();
             CustomerManager.instance.ArrangePosition();
         }, 2);
+    }
+
+    public void CheckWaitingCustomer()
+    {
+        var waitingCustomer = chairs.Find(x => x.storedCustomer != null);
+        if (waitingCustomer != null)
+        {
+            var customer = waitingCustomer.storedCustomer;
+            var task = _baseballController.allTaskControllers.Find(x => x.storedCustomer == null);
+            if (task != null && _baseballController.helmetShop.allWaitingCustomer.Count < 3)
+            {
+                waitingCustomer.storedCustomer = null;
+                customer.isSiting = false;
+                customer.SetAnimation("Sit", false);
+                customer.SetAnimation("Idle");
+                task.storedCustomer = customer;
+                task.storedCustomer.taskController = task;
+
+                _baseballController.helmetShop.allWaitingCustomer.Add(customer);
+                _baseballController.helmetShop.ArrangePosition();
+            }
+        }
     }
 }
