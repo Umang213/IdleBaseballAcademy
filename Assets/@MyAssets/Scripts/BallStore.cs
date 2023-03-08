@@ -53,7 +53,15 @@ public class BallStore : MonoBehaviour
                 point.DOScale(Vector3.one, 0.2f).SetDelay(0.5f).From(Vector3.zero).OnStart((() => point.Show()));
             }
 
-            yield return new WaitForSeconds(1);
+            if (player.IsStackFull())
+            {
+                if (PlayerPrefs.GetInt(PlayerPrefsKey.TutorialCount, 0).Equals(0))
+                {
+                    TutorialControler.Instance.targetPoint = TutorialControler.Instance.ballMachinePoint;
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

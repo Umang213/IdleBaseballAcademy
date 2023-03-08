@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -17,7 +16,6 @@ public class Unlockable : MonoBehaviour
     public GameObject unlockableObject;
 
     public UnityEvent unlockFinish;
-    public UnityEvent unlockFinishTutorial;
     public Image fillImage;
 
     bool _isPlayer;
@@ -113,7 +111,6 @@ public class Unlockable : MonoBehaviour
                         (PlayerPrefs.GetInt(PlayerPrefsKey.UnlockCount, 0) + 1));
                     //MoneyManager.instance.moneySpending.gameObject.SetActive(false);
                     Unlock();
-                    unlockFinishTutorial?.Invoke();
                     //CustomerManager.instance.ConfettiBlast.transform.position = transform.position.With(3);
                     //CustomerManager.instance.ConfettiBlast.Play();
                     yield break;
@@ -145,8 +142,8 @@ public class Unlockable : MonoBehaviour
     {
         if (unlockableObject)
             unlockableObject.transform.DOScale(Vector3.one, 0.2f).From(Vector3.zero)
-                .OnStart(() => { unlockableObject.SetActive(true); });
-        unlockFinish?.Invoke();
+                .OnStart(() => { unlockableObject.SetActive(true); })
+                .OnComplete((() => unlockFinish?.Invoke()));
         //unlockFinishTutorial?.Invoke();
         //TutorialController.instance.ShowStandToBuy();
         gameObject.SetActive(false);

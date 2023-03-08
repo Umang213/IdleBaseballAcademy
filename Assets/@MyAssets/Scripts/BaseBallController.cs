@@ -4,8 +4,6 @@ using UnityEngine;
 public class BaseBallController : MonoBehaviour
 {
     public static BaseBallController instance;
-    public List<GameObject> allHelmet;
-    public List<GameObject> allBaseball;
     public HelmetShop helmetShop;
     public BaseballShop baseballShop;
     public List<TaskController> allTaskControllers;

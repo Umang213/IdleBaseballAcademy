@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TaskController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class TaskController : MonoBehaviour
     public Transform ballShotPoint;
     public Transform ballShotPoint1;
     public Transform[] points;
-    List<Ball> _usedBall = new List<Ball>();
+    public List<Ball> usedBall;
     int _ballCount;
     bool _isPlayer;
     bool _isTaskStart;
@@ -22,6 +23,7 @@ public class TaskController : MonoBehaviour
     private void Start()
     {
         _poolManager = PoolManager.instance;
+        BaseBallController.instance.allTaskControllers.Add(this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +45,12 @@ public class TaskController : MonoBehaviour
         {
             if (_isPlayer) return;
             _isPlayer = true;
+            if (player.allStackItems.Count.Equals(maxStackCount))
+            {
+                TutorialControler.Instance.targetPoint = null;
+                PlayerPrefs.SetInt(PlayerPrefsKey.TutorialCount, 1);
+            }
+
             StartCoroutine(RemoveBall(player));
         }
     }
@@ -66,7 +74,7 @@ public class TaskController : MonoBehaviour
                 if (ball != null) allBalls.Add(ball);
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -78,6 +86,14 @@ public class TaskController : MonoBehaviour
 
     IEnumerator PlayTask()
     {
+        if (allBalls.Count.Equals(0))
+        {
+            if (PlayerPrefs.GetInt(PlayerPrefsKey.TutorialCount, 0).Equals(0))
+            {
+                TutorialControler.Instance.targetPoint = TutorialControler.Instance.ballStorage;
+            }
+        }
+
         yield return new WaitUntil(() => allBalls.Count > 0);
         yield return new WaitForSeconds(1);
         var ball = allBalls[0];
@@ -99,11 +115,10 @@ public class TaskController : MonoBehaviour
             }
 
             ball.rb.AddForce(pos * Random.Range(400, 500));
-            //_poolManager.PoolBall(ball);
         });
         yield return new WaitForSeconds(0.85f);
         storedCustomer.SetAnimation("Shot");
-        _usedBall.Add(ball);
+        usedBall.Add(ball);
         yield return new WaitForSeconds(5);
         _ballCount += 1;
         if (_ballCount.Equals(6))
@@ -124,10 +139,21 @@ public class TaskController : MonoBehaviour
     IEnumerator CleanBall()
     {
         yield return new WaitForSeconds(10);
-        for (byte i = 0; i < _usedBall.Count; i++)
+        //var temp = usedBall;
+        for (var i = usedBall.Count - 1; i >= 0; i--)
         {
-            _usedBall[i].rb.isKinematic = true;
-            _poolManager.PoolBall(_usedBall[i]);
+            _poolManager.PoolBall(usedBall[i]);
+            usedBall.Remove(usedBall[i]);
+        }
+    }
+
+    public void ChangeStackPoint(Transform point)
+    {
+        stackPoint = point;
+
+        for (var i = 0; i < allBalls.Count; i++)
+        {
+            allBalls[i].transform.SetParent(stackPoint);
         }
     }
 }

@@ -74,13 +74,13 @@ public class HelmetShop : MonoBehaviour
         if (temp != null && _storedCustomer != null)
         {
             temp.SetActive(false);
-            allWaitingCustomer.Remove(_storedCustomer);
             if (_storedCustomer.isGirl)
             {
                 _storedCustomer.hair.Hide();
             }
 
             _storedCustomer.helmet.Show();
+            allWaitingCustomer.Remove(_storedCustomer);
             _ballController.baseballShop.allWaitingCustomer.Add(_storedCustomer);
             _ballController.baseballShop.ArrangePosition();
             _storedCustomer = null;

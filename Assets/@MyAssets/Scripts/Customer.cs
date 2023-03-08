@@ -139,11 +139,6 @@ public class Customer : MonoBehaviour
         {
             SetAnimation(aniprm[Helper.RandomInt(0, aniprm.Count)]);
         }
-        else
-        {
-            yield break;
-        }
-
         yield return new WaitForSeconds(Helper.RandomInt(10, 25));
         StartCoroutine(PlaySitingAnimation());
     }

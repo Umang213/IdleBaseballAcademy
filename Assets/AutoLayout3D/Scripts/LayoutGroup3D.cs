@@ -13,17 +13,25 @@ namespace AutoLayout3D
 
     public enum Direction
     {
-        LowerToUpper, UpperToLower
+        LowerToUpper,
+        UpperToLower
     }
 
     public enum AxisOrder
     {
-        XYZ, XZY, YXZ, YZX, ZXY, ZYX
+        XYZ,
+        XZY,
+        YXZ,
+        YZX,
+        ZXY,
+        ZYX
     }
 
     public enum AxisAlignment
     {
-        Upper, Middle, Lower
+        Upper,
+        Middle,
+        Lower
     }
 
     [System.Serializable]
@@ -39,7 +47,8 @@ namespace AutoLayout3D
 
     public enum ConstraintType
     {
-        Flexible, FixedCellCount
+        Flexible,
+        FixedCellCount
     }
 
     [System.Serializable]
@@ -57,13 +66,12 @@ namespace AutoLayout3D
 
         public abstract void UpdateLayout();
 
-#if UNITY_EDITOR
+
         //update layout every frame only in editor
         private void Update()
         {
             //if (!Application.isPlaying) //update layout every frame only in edit mode
             UpdateLayout();
         }
-#endif
     }
 }

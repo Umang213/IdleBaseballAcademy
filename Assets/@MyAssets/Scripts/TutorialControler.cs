@@ -4,11 +4,13 @@ using UnityEngine.Events;
 
 public class TutorialControler : MonoBehaviour
 {
+    public static TutorialControler Instance;
     [SerializeField] private Transform counterPoint;
     public Transform helmetPoint;
     public Transform baseballPoint;
+    public Transform ballStorage;
+    public Transform ballMachinePoint;
 
-    public static TutorialControler Instance;
     public Transform targetPoint;
     public UnityEvent tutorialEvent = new UnityEvent();
 

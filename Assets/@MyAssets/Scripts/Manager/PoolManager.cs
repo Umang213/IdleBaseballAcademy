@@ -81,6 +81,7 @@ public class PoolManager : MonoBehaviour
         else
         {
             var ball = Instantiate(ballPrefab, transform);
+            ball.rb.isKinematic = true;
             return ball;
         }
     }
@@ -121,6 +122,7 @@ public class PoolManager : MonoBehaviour
         }
         else
         {
+            ball.rb.isKinematic = true;
             ball.Hide();
             ball.transform.SetParent(transform);
             allHideBall.Add(ball);

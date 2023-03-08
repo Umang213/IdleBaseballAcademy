@@ -19,19 +19,22 @@ public class BaseballShop : MonoBehaviour
     {
         if (other.TryGetComponent(out Customer tcustomer))
         {
-            if (tcustomer == allWaitingCustomer[0])
+            if (allWaitingCustomer != null)
             {
-                _storedCustomer = tcustomer;
-                PickUpBaseball();
-                /*var temp = fillObject.allFillObject.Find(x => x.activeSelf == true);
-                if (temp != null)
+                if (tcustomer == allWaitingCustomer[0])
                 {
-                    temp.Hide();
-                    allWaitingCustomer.Remove(tcustomer);
-                    tcustomer.baseball.Show();
-                    tcustomer.SetTarget(tcustomer.taskController.gamePlayPoint.position);
-                    ArrangePosition();
-                }*/
+                    _storedCustomer = tcustomer;
+                    PickUpBaseball();
+                    /*var temp = fillObject.allFillObject.Find(x => x.activeSelf == true);
+                    if (temp != null)
+                    {
+                        temp.Hide();
+                        allWaitingCustomer.Remove(tcustomer);
+                        tcustomer.baseball.Show();
+                        tcustomer.SetTarget(tcustomer.taskController.gamePlayPoint.position);
+                        ArrangePosition();
+                    }*/
+                }
             }
         }
     }
@@ -72,8 +75,8 @@ public class BaseballShop : MonoBehaviour
         if (temp != null && _storedCustomer != null)
         {
             temp.Hide();
-            allWaitingCustomer.Remove(_storedCustomer);
             _storedCustomer.baseball.Show();
+            allWaitingCustomer.Remove(_storedCustomer);
             _storedCustomer.SetTarget(_storedCustomer.taskController.gamePlayPoint.position);
             ArrangePosition();
         }

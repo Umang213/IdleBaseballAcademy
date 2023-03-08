@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour
         if (allStackItems.Count > 0)
         {
             var temp = allStackItems.Find(x => x.tag == collectables.tag);
+            temp.transform.SetParent(null);
             temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
             {
                 temp.transform.SetParent(stackTransform);
