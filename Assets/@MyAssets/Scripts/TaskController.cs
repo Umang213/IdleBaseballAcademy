@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class TaskController : MonoBehaviour
 {
@@ -18,12 +18,14 @@ public class TaskController : MonoBehaviour
     int _ballCount;
     bool _isPlayer;
     bool _isTaskStart;
-    PoolManager _poolManager;
+    private PoolManager _poolManager;
+    public GameObject _ballNotification;
 
     private void Start()
     {
         _poolManager = PoolManager.instance;
         BaseBallController.instance.allTaskControllers.Add(this);
+        _ballNotification = stackPoint.GetComponentInChildren<Image>(true).gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,9 +94,12 @@ public class TaskController : MonoBehaviour
             {
                 TutorialControler.Instance.targetPoint = TutorialControler.Instance.ballStorage;
             }
+
+            _ballNotification.Show();
         }
 
         yield return new WaitUntil(() => allBalls.Count > 0);
+        _ballNotification.Hide();
         yield return new WaitForSeconds(1);
         var ball = allBalls[0];
         ball.transform.SetParent(null);
@@ -154,6 +159,12 @@ public class TaskController : MonoBehaviour
         for (var i = 0; i < allBalls.Count; i++)
         {
             allBalls[i].transform.SetParent(stackPoint);
+        }
+
+        _ballNotification = point.GetComponentInChildren<Image>(true).gameObject;
+        if (allBalls.Count.Equals(0) && _isTaskStart)
+        {
+            _ballNotification.Show();
         }
     }
 }

@@ -13,6 +13,19 @@ public class FillObject : MonoBehaviour
     public UnityEvent playerTriggerEnter;
     public Vector3 position;
     public bool isHelmetShop;
+    public Image notification;
+
+    private void LateUpdate()
+    {
+        if (allFillObject.FindAll(x => x.activeSelf == true).Count > 0)
+        {
+            notification.Hide();
+        }
+        else
+        {
+            notification.Show();
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -79,35 +92,4 @@ public class FillObject : MonoBehaviour
             }
         }
     }
-
-    /*IEnumerator StartFilling()
-    {
-        var temp = allFillObject.FindAll(x => x.activeSelf == false);
-        for (byte i = 0; i < allFillObject.Count; i++)
-        {
-            if (_isPLayer)
-            {
-                var i1 = i;
-                DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 0, 1f).From(1)
-                    .OnComplete(
-                        () =>
-                        {
-                            temp[i1].Show();
-                            temp[i1].transform.DOScale(Vector3.one, 0.75f).SetEase(Ease.OutBack).From(Vector3.zero);
-                        })
-                    .SetId(fillImage);
-                yield return new WaitForSeconds(1);
-            }
-            else
-            {
-                yield break;
-            }
-
-            if (i == allFillObject.Count - 1)
-            {
-                DOTween.Kill(fillImage);
-                DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 1, 0.5f);
-            }
-        }
-    }*/
 }

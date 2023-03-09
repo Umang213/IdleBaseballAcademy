@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
         {
             instance = this;
         }
+
+        //import and check Hyper Gym trainer ,Shooting Zone idle new assets ,baseball game solve some bug and make apk,add new player model and set animation 
         //_anim = GetComponentInChildren<Animator>();
         //_rb = GetComponent<Rigidbody>();
         enabled = false;
